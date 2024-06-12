@@ -102,28 +102,6 @@ services:
     networks:
       - redis
 
-  discord:
-    build:
-      context: .
-      dockerfile: discord/Dockerfile
-    volumes:
-      - ./discord:/app
-      - ./db:/app/db
-      - ./redis:/app/redis_crud
-    env_file:
-      - ./envs/discord.env
-      - ./envs/db.env
-      - ./envs/sentry.env
-    restart: always
-    depends_on:
-      db:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    networks:
-      - db
-      - redis
-
   db-migrator:
     build:
       context: .

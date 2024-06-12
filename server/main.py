@@ -2,6 +2,7 @@ import json
 import logging
 
 from fastapi import FastAPI, Request, Response, Depends
+from starlette.staticfiles import StaticFiles
 
 from db.package.session import get_db
 from redis_crud import SessionCrud
@@ -78,7 +79,7 @@ async def session_creator(request: Request, call_next):
 
 
 # mount static folder
-# app.mount("/static", StaticFiles(directory="/app/static"), name="static")
+app.mount("/api/static", StaticFiles(directory="/app/static"), name="static")
 
 # add routers
 app.include_router(
